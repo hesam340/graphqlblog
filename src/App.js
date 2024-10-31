@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+
+import HomePage from "./componenets/home/HomePage";
+import Layout from "./componenets/layout/Layout";
+import BlogPage from "./componenets/blog/BlogPage";
+import AuthorPage from "./componenets/authors/AuthorPage";
+import Blog from "./componenets/blog/Blog";
+import Authors from "./componenets/authors/Authors";
+import PageNotFound from "./componenets/pagenotfound/PageNotFound";
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blogs" element={<Blog />} />
+        <Route path="/blogs/:slug" element={<BlogPage />} />
+        <Route path="/authors" element={<Authors />} />
+        <Route path="/authors/:slug" element={<AuthorPage />} />
+        <Route path="/*" element={<PageNotFound />} />
+      </Routes>
+    </Layout>
   );
 }
 
